@@ -17,11 +17,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup node
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 16.16
-          cache: npm
+          node-version: 16
+          cache: 'npm'
+          cache-dependency-path: subdir/package-lock.json
+      - run: npm ci
+      - run: npm test
 
       - name: Build application
         run: echo "$(ls -la)" 
