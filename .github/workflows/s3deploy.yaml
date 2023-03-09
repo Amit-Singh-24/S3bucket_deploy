@@ -25,7 +25,8 @@ jobs:
       - name: Install Angular
         run: |
           echo "$(ls -la)"
-          npm install -g @angular/cli@13.3.9
+          npm install -g @angular/cli@8.19.3  
+          sudo npm install -g yarn
           ng v
 
       - name: Install npm dependencies
