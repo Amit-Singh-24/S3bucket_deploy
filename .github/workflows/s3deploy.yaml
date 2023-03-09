@@ -21,10 +21,25 @@ jobs:
         with:
           node-version: 16.19.1
           cache: 'npm'
-          cache-dependency-path: subdir/package-lock.json
-      - run: npm ci
-      - run: npm test
+         # cache-dependency-path: subdir/package-lock.json
+      - name: Install Angular
+        run: |
+          echo "$(ls -la)"
+          npm install -g @angular/cli@13.3.9
+          ng v
 
+      - name: Install npm dependencies
+        run: npm install --include=dev
+
+      - name: Build preview library
+        run: |
+          npm run build:preview-library
+
+      - name: Build application
+        run: |
+          npm run build:production
+          echo "$(ls -la dist/)"
+      
       - name: Build application
         run: echo "$(ls -la)" 
 
